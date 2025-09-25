@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Portafolio</title>
+
+  <!-- Tipografía -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --plum: #490839;
+      --candy: #FFA7EC;
+      --pink: #CB1D85;
+      --carrot: #F94500;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Nunito', Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: var(--plum);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      z-index: 1000;
+    }
+
+    header h1 { margin: 0; font-size: 1.4rem; font-weight: 900; }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    nav a:hover { color: var(--candy); }
+
+    /* Inicio */
+    #inicio {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      background: black;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: -60px; 
+      left: 0;
+      width: 100%;
+      height: calc(100% + 60px);
+      border: none;
+      overflow: hidden;
+      scrollbar-width: none;
+    }
+
+    .iframe-wrapper iframe::-webkit-scrollbar { display: none; }
+
+    .inicio-titulo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: clamp(4rem, 12vw, 8rem);
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+      text-shadow: 4px 4px 20px rgba(0,0,0,0.8);
+      font-weight: 900;
+    }
+
+    /* Asignatura */
+    #asignatura {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .asignatura-texto {
+      width: 50%;
+      padding: 40px 30px;
+      background-color: var(--carrot);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      text-align: justify;
+    }
+
+    .asignatura-texto h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .asignatura-texto p, 
+    .asignatura-texto ul {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .asignatura-sketch {
+      width: 50%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--carrot);
+      position: relative;
+    }
+
+    .btn-wiki {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      color: var(--carrot);
+      padding: 15px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 900;
+      box-shadow: 3px 3px 15px rgba(0,0,0,0.4);
+      transition: 0.3s;
+      z-index: 20;
+    }
+
+    .btn-wiki:hover {
+      background-color: var(--pink);
+      color: white;
+    }
+
+    /* Portafolio */
+    #portafolio {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .portafolio-texto {
+      width: 50%;
+      padding: 40px 30px;
+      background-color: var(--plum);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+      text-align: justify;
+    }
+
+    .portafolio-texto h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .portafolio-texto p, 
+    .portfolio-tareas a {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .portfolio-tareas {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .portfolio-tareas a {
+      display: block;
+      margin: 10px auto;
+      background-color: white;
+      color: var(--plum);
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 900;
+      text-decoration: none;
+      width: fit-content;
+      transition: 0.3s;
+    }
+
+    .portfolio-tareas a:hover {
+      background-color: var(--pink);
+      color: white;
+    }
+
+    .portafolio-sketch {
+      width: 50%;
+      height: 100vh;
+      overflow: hidden;
+      background-color: var(--plum);
+      position: relative;
+    }
+
+    /* Sobre mí */
+    #sobre-mi {
+      min-height: 100vh;
+      background-color: var(--candy);
+      color: var(--plum);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 40px;
+      text-align: justify;
+    }
+
+    #sobre-mi h2 {
+      font-size: 2.4rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    #sobre-mi p {
+      max-width: 900px;
+      line-height: 1.8;
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+
+    .contacto {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .contacto h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--plum);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-weight: 700;
+    }
+
+    body > section:first-of-type { margin-top: 70px; }
+
+    @media (max-width: 900px) {
+      #asignatura, #portafolio { flex-direction: column; }
+      .asignatura-texto, .asignatura-sketch,
+      .portafolio-texto, .portafolio-sketch {
+        width: 100%; height: auto;
+      }
+      .iframe-wrapper { height: 400px; }
+      .iframe-wrapper iframe { top: 0; height: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h1>Mi Portafolio</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#asignatura">Asignatura</a>
+      <a href="#portafolio">Tareas p5.js</a>
+      <a href="#sobre-mi">Sobre mí</a>
+    </nav>
+  </header>
+
+  <!-- Inicio -->
+  <section id="inicio">
+    <h1 class="inicio-titulo">Imagen escrita 2025</h1>
+    <div class="iframe-wrapper">
+      <iframe src="https://editor.p5js.org/Josefa.rojas.m/full/7hhqtRZbM" scrolling="no"></iframe>
+    </div>
+  </section>
+
+  <!-- Asignatura -->
+  <section id="asignatura">
+    <div class="asignatura-texto">
+      <h2>Asignatura</h2>
+      <p>
+        La asignatura <strong>Imagen Escrita</strong> aborda la relación entre diseño, programación y arte generativo, explorando la programación creativa con <strong>p5.js</strong> y su aplicación en el diseño visual interactivo.  
+        A través del <em>creative coding</em> y herramientas como Visual Studio Code, GitHub y ChatGPT, se fomenta el pensamiento computacional como recurso creativo, integrando tecnologías digitales e inteligencia artificial para ampliar las posibilidades del diseño y la creación artística.
+      </p>
+      <ul>
+        <li>Explorar la programación creativa con p5.js.</li>
+        <li>Aplicar el pensamiento computacional en proyectos de diseño.</li>
+        <li>Experimentar con arte generativo e interactividad.</li>
+        <li>Integrar IA y herramientas digitales en procesos creativos.</li>
+      </ul>
+    </div>
+
+    <div class="asignatura-sketch">
+      <div class="iframe-wrapper">
+        <iframe src="https://editor.p5js.org/Josefa.rojas.m/full/BkNLYHkrd" scrolling="no"></iframe>
+        <a href="https://wiki.ead.pucv.cl/Sitio_Web_IE_-_Josefa_Rojas_Maizares" 
+           target="_blank" 
+           class="btn-wiki">
+           Wiki del proyecto
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portafolio -->
+  <section id="portafolio">
+    <div class="portafolio-texto">
+      <h2>Tareas p5.js</h2>
+      <p>
+        En esta sección se presentan las tareas realizadas a lo largo de la asignatura, 
+        utilizando el entorno de programación <strong>p5.js</strong>. Cada actividad refleja la aplicación 
+        de los conceptos aprendidos en clase, abarcando desde ejercicios básicos hasta 
+        proyectos más completos.
+      </p>
+      <div class="portfolio-tareas">
+        <a href="https://editor.p5js.org/Josefa.rojas.m/sketches/tzwuIrR1X" target="_blank">Tarea 1</a>
+        <a href="https://editor.p5js.org/Josefa.rojas.m/sketches/X_NwF_JmB" target="_blank">Tarea 2</a>
+        <a href="https://editor.p5js.org/Josefa.rojas.m/sketches/Fj2Avxgii" target="_blank">Tarea 3</a>
+        <a href="https://editor.p5js.org/Josefa.rojas.m/sketches/Z9C-ZKeZ8" target="_blank">Tarea 4</a>
+      </div>
+    </div>
+
+    <div class="portafolio-sketch">
+      <div class="iframe-wrapper">
+        <iframe src="https://editor.p5js.org/Josefa.rojas.m/full/MYFEvomlg" scrolling="no"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre mí -->
+  <section id="sobre-mi">
+    <h2>Sobre mí</h2>
+    <p>
+      Me llamo <strong>Josefa Rojas</strong> y soy estudiante de diseño con un enfoque en el <strong>diseño de objetos</strong>.  
+      Actualmente curso mis estudios en la <strong>Pontificia Universidad Católica de Valparaíso (PUCV)</strong>, donde he podido cultivar mi pasión por el diseño y la exploración de nuevas posibilidades creativas.  
+      Gracias a esta asignatura he ampliado mis conocimientos, profundizando en la comprensión de los códigos y en el uso de herramientas como <strong>HTML</strong>, <strong>GitHub</strong> y otras tecnologías digitales que enriquecen y fortalecen tanto mi proceso creativo como académico.
+    </p>
+
+    <div class="contacto">
+      <h3>Contacto</h3>
+      <p>Creado por: <strong>Josefa Rojas Maizares</strong></p>
+      <p>Email: <a href="mailto:josefa.rojas.m@mail.pucv.com">josefa.rojas.m@mail.pucv.com</a></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 - Mi Portafolio</p>
+  </footer>
+
+</body>
+</html>
